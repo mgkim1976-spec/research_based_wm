@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+    <h1 class="text-3xl font-bold text-miraeNavy mb-6 border-b pb-4">PB 워크플로우 가이드 (Copilot Routines)</h1>
+
+    <p class="text-gray-700 leading-relaxed mb-8">
+        본 시스템은 **"Research + Video 하이브리드 영업"** 방식의 정착을 돕기 위한 사내 전용 도구입니다. 리서치 리포트를 단순히 파일 형태로 전달하는 기존 방식을 넘어, 시각적으로 이해가
+        쉬운 **스마트머니 유튜브 영상**을 결합하여 고객의 이해도를 높이고 긍정적인 자문 경험을 제공합니다.
+    </p>
+
+    <!-- Customer Segments Section -->
+    <div class="mb-12">
+        <h2 class="text-xl font-bold text-gray-800 mb-6 border-l-4 border-miraeNavy pl-3">고객 세그먼트 정의 (Targeting
+            Segments)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+                <div class="flex items-center mb-2">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded mr-2">S1</span>
+                    <span class="font-bold text-gray-800">휴면/초보</span>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">자산 규모가 작고 거래가 뜸한 고객. 영상 중심의 쉬운 접근과 기초 교육 루틴(D) 필요.</p>
+            </div>
+            <div class="bg-green-50/50 p-4 rounded-lg border border-green-100">
+                <div class="flex items-center mb-2">
+                    <span class="bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded mr-2">S2</span>
+                    <span class="font-bold text-gray-800">액티브/유망</span>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">소액이지만 거래가 빈번하고 트렌드에 민감한 고객. 모닝 루틴(A) 및 테마 루틴(C) 주 타겟.
+                </p>
+            </div>
+            <div class="bg-orange-50/50 p-4 rounded-lg border border-orange-100">
+                <div class="flex items-center mb-2">
+                    <span class="bg-orange-600 text-white text-xs font-bold px-2 py-0.5 rounded mr-2">S3</span>
+                    <span class="font-bold text-gray-800">안정형/고액</span>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">자산 규모는 크나 보수적이고 안정을 추구하는 고객. 격주 전문 분석(B) 및 심층 관리에 집중.
+                </p>
+            </div>
+            <div class="bg-purple-50/50 p-4 rounded-lg border border-purple-100">
+                <div class="flex items-center mb-2">
+                    <span class="bg-purple-600 text-white text-xs font-bold px-2 py-0.5 rounded mr-2">S4</span>
+                    <span class="font-bold text-gray-800">VIP/전문가</span>
+                </div>
+                <p class="text-xs text-gray-600 leading-relaxed">자산가이면서 시장 전문성이 매우 높은 핵심 고객. 모든 루틴(A~D)을 VVIP 관점에서 타격.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Routine A -->
+    <div class="mb-10">
+        <h2 class="text-xl font-bold text-miraeOrange mb-3 flex items-center">
+            <span class="bg-miraeOrange text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">A</span>
+            일간 모닝 루틴 (Morning Market Temperature)
+        </h2>
+        <div class="bg-gray-50 p-5 rounded border-l-4 border-miraeOrange">
+            <ul class="space-y-2 text-gray-800 text-sm">
+                <li><strong>목적:</strong> 쏟아지는 아침 정보의 핵심 맥락을 짚어주고, 전일 밤 미국 증시와 핵심 매크로 이슈를 빠르게 요약</li>
+                <li><strong>발송 타이밍:</strong> 평일 오전 08:10 ~ 08:30 (장 시작 전)</li>
+                <li><strong>주력 콘텐츠:</strong> 일일 시황 리포트 + '월스트리트파인더' 등 데일리 라이브 영상</li>
+                <li><strong>주요 타겟 고객:</strong> 바쁜 텍스트 선호형 고객부터 초보 고객까지 전반적. (특히 S1/S2 타겟 영상 우선 제공)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Routine B -->
+    <div class="mb-10">
+        <h2 class="text-xl font-bold text-miraeNavy mb-3 flex items-center">
+            <span class="bg-miraeNavy text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">B</span>
+            격주 심층 포트폴리오 루틴 (Deep Portfolio Skeleton)
+        </h2>
+        <div class="bg-gray-50 p-5 rounded border-l-4 border-miraeNavy">
+            <ul class="space-y-2 text-gray-800 text-sm">
+                <li><strong>목적:</strong> 표면적 시황을 넘어 실적 및 섹터 펀더멘털의 변화를 설명하고 실제 포트폴리오 편입/편출 의사결정을 유도</li>
+                <li><strong>발송 타이밍:</strong> 격주 목요일 오후 (장이 비교적 안정된 시간대)</li>
+                <li><strong>주력 콘텐츠:</strong> 미래에셋 미닛(분석 리포트) + 애널리스트 심층 리포트 영상(리포트)</li>
+                <li><strong>주요 타겟 고객:</strong> 액티브 트레이딩 성향 (S2), 종목 쏠림 현상이 있는 고액 자산가 (S3/S4)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Routine C -->
+    <div class="mb-10">
+        <h2 class="text-xl font-bold text-green-700 mb-3 flex items-center">
+            <span class="bg-green-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">C</span>
+            주말 테마 루틴 (Weekend Theme Discovery)
+        </h2>
+        <div class="bg-gray-50 p-5 rounded border-l-4 border-green-700">
+            <ul class="space-y-2 text-gray-800 text-sm">
+                <li><strong>목적:</strong> 당장의 트레이딩보다 트렌드(AI, 인도 시장, 우주항공 등)에 대한 인사이트를 제공하여 관심(Engagement) 유도</li>
+                <li><strong>발송 타이밍:</strong> 금요일 오후 ~ 토요일 오전 (주말 여가 시간 활용)</li>
+                <li><strong>주력 콘텐츠:</strong> 주간 테마 전망 리포트 + 'ETF&', 테마 분석 영상</li>
+                <li><strong>주요 타겟 고객:</strong> 모든 세그먼트 (S4에게는 구체적인 투자 가능성으로 어필)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Routine D -->
+    <div class="mb-10">
+        <h2 class="text-xl font-bold text-purple-700 mb-3 flex items-center">
+            <span class="bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">D</span>
+            비정기 교육/신뢰 구축 루틴 (Educational Confidence)
+        </h2>
+        <div class="bg-gray-50 p-5 rounded border-l-4 border-purple-700">
+            <ul class="space-y-2 text-gray-800 text-sm">
+                <li><strong>목적:</strong> 투자를 어려워하는 고객, 혹은 연금 특화 고객들에게 부담 없이 다가가며, 심리적 장벽 완화</li>
+                <li><strong>발송 타이밍:</strong> 월 1회, 휴일 전후 이벤트성 발송</li>
+                <li><strong>주력 콘텐츠:</strong> 연금/IRP 가이드 문서 + 금융 웹드라마, 초보자 강좌 등 서사 중심의 영상</li>
+                <li><strong>주요 타겟 고객:</strong> 투자 왕초보(Novice), 휴면 고객 (S1)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Routine-Segment Mapping Table -->
+    <div class="mt-12 mb-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-6 border-l-4 border-gray-800 pl-3">루틴 - 고객 세그먼트 매핑 요약</h2>
+        <div class="overflow-hidden border border-gray-200 rounded-lg shadow-sm">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-gray-50 border-b border-gray-200 font-bold text-miraeNavy">
+                    <tr>
+                        <th class="px-4 py-3">루틴 유형</th>
+                        <th class="px-4 py-3">필수 타겟</th>
+                        <th class="px-4 py-3">콘텐츠 성격</th>
+                        <th class="px-4 py-3">권장 주기</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-miraeOrange">A. 일간 모닝</td>
+                        <td class="px-4 py-3">S2, S4 (전체 가능)</td>
+                        <td class="px-4 py-3">실시간 시황 + 숏폼 영상</td>
+                        <td class="px-4 py-3">매일 아침 (오전 8시)</td>
+                    </tr>
+                    <tr class="bg-gray-50/30">
+                        <td class="px-4 py-3 font-bold text-miraeNavy">B. 격주 심층</td>
+                        <td class="px-4 py-3">S3, S4</td>
+                        <td class="px-4 py-3">심층 리서치 + 분석 영상</td>
+                        <td class="px-4 py-3">격주 목요일 오후</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-green-700">C. 주말 테마</td>
+                        <td class="px-4 py-3">S1, S2, S4</td>
+                        <td class="px-4 py-3">트렌드 인사이트 + 테마 영상</td>
+                        <td class="px-4 py-3">매주 금/토</td>
+                    </tr>
+                    <tr class="bg-gray-50/30">
+                        <td class="px-4 py-3 font-bold text-purple-700">D. 교육/신뢰</td>
+                        <td class="px-4 py-3">S1 (휴면/입문)</td>
+                        <td class="px-4 py-3">가이드북 + 서사형 영상</td>
+                        <td class="px-4 py-3">매월 1회</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Priority Scoring Explanation -->
+    <div class="mt-12 mb-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-6 border-l-4 border-red-600 pl-3">우선순위(Priority) 점수 체계</h2>
+        <div class="bg-red-50/30 p-6 rounded-lg border border-red-100">
+            <p class="text-sm text-gray-700 mb-4">
+                'Customer Queues' 명단은 AI가 계산한 **우선순위 점수(P1 ~ P10)**에 따라 내림차순으로 정렬됩니다. 점수가 높을수록 현재 루틴과 고객의 투자 성향이 매우 밀접하게
+                매칭됨을 의미하며, PB가 가장 먼저 연락해야 할 대상을 나타냅니다.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <ul class="space-y-3 text-xs text-gray-600">
+                    <li class="flex items-start">
+                        <span class="font-bold text-red-600 mr-2">P8 ~ P10:</span>
+                        <span>**매우 높음.** 전문적인 자산 관리가 필요한 S3/S4 대상 심층 루틴(B) 등에서 부여됩니다.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-bold text-orange-600 mr-2">P5 ~ P7:</span>
+                        <span>**높음.** 액티브한 S2/S4 대상 모닝 루틴(A)의 핵심 타겟입니다.</span>
+                    </li>
+                </ul>
+                <ul class="space-y-3 text-xs text-gray-600">
+                    <li class="flex items-start">
+                        <span class="font-bold text-blue-600 mr-2">P2 ~ P4:</span>
+                        <span>**보통.** 일반적인 정보 전달이나 초보자 대상 교육 루틴(D)에서 주로 사용됩니다.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-bold text-gray-400 mr-2">P1:</span>
+                        <span>**기본.** 배경지식 차원의 참고 자료 수준입니다.</span>
+                    </li>
+                </ul>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-4 italic">* 점수는 루틴의 긴급도와 고객 세그먼트의 적합성을 결합하여 실시간으로 산출됩니다.</p>
+        </div>
+    </div>
+
+    <!-- Work SOP Section -->
+    <div class="mt-12 mb-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-6 border-l-4 border-gray-800 pl-3">권장 업무 절차 (Standard Operating
+            Procedure)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="text-miraeOrange font-bold text-lg mb-2">01. 데이터 확인</div>
+                <p class="text-xs text-gray-600">출근 직후 대시보드에 접속하여 AI가 선정한 오늘 최고의 리서치와 영상을 확인합니다.</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="text-miraeOrange font-bold text-lg mb-2">02. 메시지 큐 검토</div>
+                <p class="text-xs text-gray-600">하단 'Customer Queues' 명단을 확인하고, AI가 제안한 토킹 포인트를 읽어봅니다.</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="text-miraeOrange font-bold text-lg mb-2">03. 개인화 및 발송</div>
+                <p class="text-xs text-gray-600">메시지 초안을 복사하여 고객의 이름을 넣는 등 최소한의 수정을 거쳐 카카오톡으로 발송합니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-12 bg-gray-100 p-4 rounded-lg">
+        <p class="text-sm font-bold text-gray-500">※ 본 가이드는 PB들의 실제 영업 템포를 고려하여 설계되었습니다. 무분별한 카카오톡 발송보다는 '고객군별 적합한 발송
+            규칙'을 지켜주시기 바랍니다.</p>
+    </div>
+</div>
+{% endblock %}

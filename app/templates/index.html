@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="mb-8 flex justify-between items-end">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Today's Hybrid Routines</h1>
+        <p class="text-gray-500 mt-2">AI가 발굴한 시황 중심의 텍스트 리포트 + 스마트머니 영상 추천 (Routine A)</p>
+    </div>
+    <form action="/run_routine" method="POST">
+        <input type="hidden" name="routine_type" value="A">
+        <button type="submit"
+            class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm transition-colors flex items-center">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                </path>
+            </svg>
+            오늘의 루틴 새로고침
+        </button>
+    </form>
+</div>
+
+{% if data and data.status == 'success' %}
+<!-- Bundle Summary Card -->
+<div class="bg-white rounded-xl shadow border border-gray-100 p-6 mb-8 flex flex-col md:flex-row gap-6">
+    <div class="flex-1">
+        <h2 class="text-xl font-bold text-miraeNavy mb-2">{{ data.bundle.routine_type }}</h2>
+        <div class="inline-block bg-orange-100 text-miraeOrange text-xs px-2 py-1 rounded font-semibold mb-4">
+            {{ data.report_data.get('time_horizon', 'Short-term') }}
+        </div>
+
+        <h3 class="font-bold text-gray-700 mt-2 border-l-4 border-miraeOrange pl-2 flex items-center">
+            {{ data.report_data.get('report_title', '결합된 리서치 리포트') }}
+            {% if data.bundle.report_id %}
+            <a href="{{ data.report_data.get('source_url', '#') }}" target="_blank"
+                class="ml-2 text-xs text-miraeOrange hover:underline flex items-center">
+                (원본 리포트 보기 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>)
+            </a>
+            {% endif %}
+        </h3>
+        <p class="text-[11px] text-gray-400 ml-3 mt-1">{{ data.bundle.report_id }} | Tags: {{
+            data.report_data.get('sector_impact', []) | join(', ') }}</p>
+        <p class="text-gray-900 mt-2 ml-3 italic">"{{ data.report_data.get('thesis', '핵심 아이디어가 요약됩니다.') }}"</p>
+
+        {% if data.bundle.video_id and data.bundle.video_id != "None" %}
+        <h3 class="font-bold text-gray-700 mt-6 border-l-4 border-miraeNavy pl-2 flex items-center">
+            추천 연결 영상
+            <a href="https://www.youtube.com/watch?v={{ data.bundle.video_id }}" target="_blank"
+                class="ml-2 text-xs text-miraeNavy hover:underline flex items-center">
+                (유튜브 영상 보기 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>)
+            </a>
+        </h3>
+        <p class="text-sm text-gray-600 ml-3 mt-1">{{ data.bundle.video_id }}</p>
+        <p class="text-gray-900 mt-2 ml-3">"{{ data.video_data.get('transcript_summary', '리포트와 연관된 최근 영상이 없습니다.') }}"
+        </p>
+        {% endif %}
+    </div>
+
+    <div class="w-full md:w-1/3 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <h4 class="font-bold text-gray-700 mb-2">매칭 사유 (AI 분석)</h4>
+        <p class="text-sm text-gray-600">{{ data.bundle.match_reason }}</p>
+
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <span class="text-xs text-gray-400 block mb-1">권장 액션 (CTA)</span>
+            <p class="font-bold text-miraeOrange">{{ data.bundle.recommended_cta }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Other Candidates for Today -->
+{% if data.other_reports %}
+<div class="mb-8">
+    <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">오늘의 다른 리서치 후보</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {% for r in data.other_reports %}
+        <div
+            class="bg-gray-50 border border-gray-200 rounded-lg p-3 flex justify-between items-center transition-all hover:border-miraeOrange/50">
+            <div class="truncate mr-4">
+                <span class="text-xs text-gray-400 block">{{ r.author }} · {{ r.date.strftime('%Y-%m-%d') if r.date else
+                    '' }}</span>
+                <span class="text-sm font-medium text-gray-700 truncate block">{{ r.title }}</span>
+            </div>
+            <form action="/run_routine" method="POST" class="flex-shrink-0">
+                <input type="hidden" name="routine_type" value="A">
+                <input type="hidden" name="report_id" value="{{ r.report_id }}">
+                <button type="submit"
+                    class="text-xs bg-white border border-gray-300 hover:border-miraeOrange hover:text-miraeOrange px-2 py-1 rounded transition-colors shadow-sm">
+                    이 리포트로 루틴 생성
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Customer Queues -->
+<h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+    Customer Queues (Follow-up 명단)
+    <span class="ml-3 bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold">[Test Data / 예시 명단]</span>
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for draft in data.drafts %}
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start mb-3">
+            <div>
+                <span class="font-bold text-lg text-gray-900">고객 ID: {{ draft.customer_id }}</span>
+                <span class="text-xs ml-2 bg-gray-100 text-gray-600 px-2 py-1 rounded">우선순위: P{{
+                    draft.follow_up_priority }}</span>
+            </div>
+            <button onclick="openModal(`{{ draft.client_message_draft }}`)"
+                class="bg-miraeNavy text-white px-3 py-1.5 rounded text-sm hover:bg-blue-800 transition-colors">
+                메시지 발송 초안 보기
+            </button>
+        </div>
+
+        <div class="bg-blue-50 p-3 rounded text-sm text-gray-700 mb-3 border border-blue-100">
+            <strong class="text-miraeNavy">PB 통화용 토킹 포인트:</strong><br />
+            {{ draft.pb_talking_points | replace('\n', '<br />') | safe }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Research History List -->
+<div class="mt-12">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+        최근 리서치 히스토리
+        <span class="ml-2 text-sm font-normal text-gray-400">(저장된 데이터 기반)</span>
+    </h2>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 border-b border-gray-100 font-bold text-gray-700">
+                <tr>
+                    <th class="px-6 py-3">날짜</th>
+                    <th class="px-6 py-3">제목</th>
+                    <th class="px-6 py-3">작성자</th>
+                    <th class="px-6 py-3">링크</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                {% for report in all_reports %}
+                <tr class="hover:bg-blue-50/30 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap text-gray-500">{{ report.date.strftime('%Y-%m-%d') if
+                        report.date else 'N/A' }}</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">{{ report.title }}</td>
+                    <td class="px-6 py-4 text-gray-600">{{ report.author }}</td>
+                    <td class="px-6 py-4">
+                        <a href="{{ report.source_url }}" target="_blank" class="text-miraeOrange hover:underline">원본
+                            보기</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="px-6 py-10 text-center text-gray-400">저장된 리서치 자료가 없습니다.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+    <p class="text-yellow-700">아직 오늘의 번들이 생성되지 않았거나 데이터를 불러오지 못했습니다. <br /> (오류: {{ data.get('message', '알 수 없음') if
+        data else '데이터 없음' }})</p>
+</div>
+{% endif %}
+
+<!-- Draft Editor Modal -->
+<div id="draftModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-lg">
+        <h3 class="text-lg font-bold mb-4">고객 발송 메시지 초안 (수정 가능)</h3>
+        <textarea id="draftText"
+            class="w-full h-48 p-3 border border-gray-300 rounded focus:border-miraeOrange focus:ring-1 focus:ring-miraeOrange outline-none text-sm"></textarea>
+        <p class="text-xs text-red-500 mt-2">* 시스템 테스트용 가상 메시지입니다.</p>
+        <div class="flex justify-end mt-4 space-x-3">
+            <button onclick="closeModal()"
+                class="px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50">닫기</button>
+            <button onclick="copyToClipboard()"
+                class="px-4 py-2 bg-miraeOrange text-white rounded hover:bg-orange-600">클립보드 복사</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(text) {
+        document.getElementById('draftText').value = text;
+        document.getElementById('draftModal').classList.remove('hidden');
+    }
+    function closeModal() {
+        document.getElementById('draftModal').classList.add('hidden');
+    }
+    function copyToClipboard() {
+        var text = document.getElementById('draftText').value;
+        navigator.clipboard.writeText(text).then(function () {
+            alert('클립보드에 복사되었습니다. 카카오톡 창에 붙여넣으세요.');
+            closeModal();
+        });
+    }
+</script>
+{% endblock %}

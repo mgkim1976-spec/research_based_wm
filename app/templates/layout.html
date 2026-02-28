@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirae Asset - PB Copilot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        miraeOrange: '#F06E00',
+                        miraeNavy: '#002C5F'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-miraeNavy text-white px-6 py-4 shadow-md flex justify-between items-center">
+        <div class="text-xl font-bold flex items-center">
+            <span class="text-miraeOrange mr-2">Mirae Asset</span> PB Copilot (Stage 1)
+        </div>
+        <div class="space-x-6">
+            <a href="/" class="hover:text-miraeOrange transition-colors">대시보드</a>
+            <a href="/guide" class="hover:text-miraeOrange transition-colors bg-white/10 px-3 py-1 rounded-md text-sm">PB Workflow 가이드</a>
+        </div>
+    </nav>
+    
+    <main class="max-w-7xl mx-auto p-6 mt-4">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="text-center text-sm text-gray-400 py-8">
+        &copy; 2026 Mirae Asset Securities. For Internal PB Use Only.
+    </footer>
+</body>
+</html>
